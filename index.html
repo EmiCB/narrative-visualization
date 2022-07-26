@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- import D3 library -->
+  <script src='https://d3js.org/d3.v5.min.js'></script>
+  <!-- link stylesheets -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload='init()'>
+  <!-- type: drill down story -->
+  <h1>Hello World</h1>
+
+  <!-- main data display svg: global sales by genre -->
+  <svg width=400 height=400></svg>
+
+  <!-- TODO: add secondary data display: global sales of top 5 games in genre -->
+
+<!-- JS -->
+<script>
+  async function init() {
+    // load data downlaoded from: https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download
+    const full_data = await d3.csv('vgsales.csv');
+
+    // group data
+    // code adapted from: http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
+    var genre_totals = d3.nest()
+      .key(function(d){ return d.Genre; })
+      .rollup(function(d){
+        return d3.sum(d, function(g){ return g.Global_Sales; });
+      })
+      .entries(full_data);
+
+    // constant display settings
+    var width = 400;
+    var height = 400;
+    var margin = 50;
+
+    // display main bar chart
+    d3.select("svg")
+      .attr("width", width + 2 * margin)
+      .attr("height", height + 2 * margin)
+      .append("g")
+        .attr("transform", "translate("+margin+","+margin+")")
+      .selectAll().data(full_data).enter().append("rect")
+        .attr("x",function(d,i){ return i*(200/6); })
+        .attr("y",function(d){ return 200-(d.Global_Sales*200/42); })
+        .attr("width", 200/6)
+        .attr("height", function(d){ return d.Global_Sales*200/42; });
+  }
+  
+</script>
+</body>
+</html>
