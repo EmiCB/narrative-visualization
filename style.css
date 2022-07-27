@@ -2,6 +2,17 @@ html {
   font-family: "Courier New", monospace;
 }
 
+h1 {
+  text-align: center;
+}
+
+svg {
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+/* bar styles */
 rect {
   stroke: black;
   fill: lightblue;
@@ -9,4 +20,11 @@ rect {
 
 rect:hover {
   fill: aquamarine;
+}
+
+/* tooltips */
+#tooltip {
+  background-color: whitesmoke;
+  position: absolute; 
+  opacity: 0;
 }

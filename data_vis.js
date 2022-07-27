@@ -65,8 +65,7 @@ async function init() {
   // add tooltip (main: region breakdowns, other: top games)
   // code adapted from: https://mappingwithd3.com/tutorials/basics/tooltip/
   d3.select('body').append('div')
-    .attr('id', 'tooltip')
-    .attr('style', 'position: absolute; opacity: 0;');
+    .attr('id', 'tooltip');
 }
 
 function draw_chart(svg, data) {
@@ -83,8 +82,6 @@ function draw_chart(svg, data) {
 
   // display main bar chart
   svg 
-    //.attr("width", width + 2 * margin)
-    //.attr("height", height + 2 * margin)
     .append("g")
       .attr("transform", "translate("+margin+","+margin+")")
     .selectAll().data(data).enter().append("rect")
@@ -121,7 +118,8 @@ function draw_chart(svg, data) {
     .on(`mouseover`, function(d) {
       d3.select('#tooltip')
         .transition().duration(200)
-        .style('opacity', 1).text(d3.format('0.1f')(d.value));
+        .style('opacity', 1)
+        .text("Sales: " + d3.format('0.1f')(d.value) + " billion");
     })
     .on(`mouseout`, function() {
       d3.select('#tooltip').style('opacity', 0);

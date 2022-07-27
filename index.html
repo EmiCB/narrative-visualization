@@ -11,11 +11,13 @@
 <body onload='init()'>
   <!-- type: interactive slide show -->
   <h1>Video Game Genre Sales</h1>
-  <p>total global sales per genre</p>
+  <div class="annotation">
+    <p>total global sales per genre</p>
+  </div>
 
   <!-- slideshow buttons -->
   <!-- TODO: make visually better + more responsive -->
-  <div>
+  <div class="slideshow-buttons">
     <button onclick="draw_chart(main_chart, genre_total_sales_global)">Overview</button>
     <button onclick="draw_chart(main_chart, genre_total_sales_NA)">NA</button>
     <button onclick="draw_chart(main_chart, genre_total_sales_EU)">EU</button>
