@@ -5,23 +5,53 @@ async function init() {
 
   // group data
   // code adapted from: http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
-  const genre_totals = d3.nest()
+  const genre_total_sales_global = d3.nest()
     .key(function(d){ return d.Genre; })
     .rollup(function(d){
       return d3.sum(d, function(g){ return g.Global_Sales; });
     })
     .entries(full_data);
 
+  const genre_total_sales_NA = d3.nest()
+    .key(function(d){ return d.Genre; })
+    .rollup(function(d){
+      return d3.sum(d, function(g){ return g.NA_Sales; });
+    })
+    .entries(full_data);
+
+  const genre_total_sales_JP = d3.nest()
+    .key(function(d){ return d.Genre; })
+    .rollup(function(d){
+      return d3.sum(d, function(g){ return g.JP_Sales; });
+    })
+    .entries(full_data);
+
+  const genre_total_sales_EU = d3.nest()
+    .key(function(d){ return d.Genre; })
+    .rollup(function(d){
+      return d3.sum(d, function(g){ return g.EU_Sales; });
+    })
+    .entries(full_data);
+
   // sort data
   // code adapted from: https://stackoverflow.com/questions/46205118/how-to-sort-a-d3-bar-chart-based-on-an-array-of-objects-by-value-or-key
-  genre_totals.sort(function(a, b){ return d3.descending(a.value, b.value) });
+  genre_total_sales_global.sort(function(a, b){ return d3.descending(a.value, b.value) });
+  genre_total_sales_NA.sort(function(a, b){ return d3.descending(a.value, b.value) });
+  genre_total_sales_JP.sort(function(a, b){ return d3.descending(a.value, b.value) });
+  genre_total_sales_EU.sort(function(a, b){ return d3.descending(a.value, b.value) });
 
   // collect chart canvases
   const main_chart = d3.select("#main_chart");
-  const secondary_chart = d3.select("#secondary_chart");
 
   // draw visualizations
-  draw_main_chart(main_chart, genre_totals);
+  draw_main_chart(main_chart, genre_total_sales_global);
+
+
+  // TODO: add tooltip (main: region breakdowns, other: top games)
+  // code adapted from: https://mappingwithd3.com/tutorials/basics/tooltip/
+  d3.select('body').append('div')
+    .attr('id', 'tooltip')
+    .attr('style', 'position: absolute; opacity: 0;');
 }
 
 function draw_main_chart(svg, data) {
@@ -67,6 +97,25 @@ function draw_main_chart(svg, data) {
       .tickFormat(function(d){ return d; })
       .ticks(10));
 
-  // TODO: add annotations
-  // code adapted from: https://d3-annotation.susielu.com ?
+  // add tooltips
+  // code adapted from: https://mappingwithd3.com/tutorials/basics/tooltip/
+  const tooltip_offset = 20;
+  svg.selectAll('rect').data(data)
+    .on(`mouseover`, function(d) {
+      d3.select('#tooltip')
+        .transition().duration(200)
+        .style('opacity', 1).text(d3.format('0.1f')(d.value));
+    })
+    .on(`mouseout`, function() {
+      d3.select('#tooltip').style('opacity', 0);
+    })
+    .on(`mousemove`, function() {
+      d3.select('#tooltip')
+        .style('left', (d3.event.pageX+tooltip_offset) + 'px')
+        .style('top', (d3.event.pageY-tooltip_offset) + 'px');
+    })
 }
+
+// TODO: overly region specific data for each slide
+// TODO: add annotations
+// code adapted from: https://d3-annotation.susielu.com ?

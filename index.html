@@ -4,20 +4,18 @@
   <!-- import D3 libraries -->
   <script src='https://d3js.org/d3.v5.min.js'></script>
   <script src='https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js'></script>
-  <!-- link stylesheets -->
+  <!-- link styles -->
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body onload='init()'>
-  <!-- type: drill down story -->
+  <!-- type: interactive slide show -->
   <h1>Video Game Genre Sales</h1>
   <p>total global sales per genre</p>
 
   <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->
-  <!-- main data display svg: global sales by genre -->
-  <svg id="main_chart" width=700 height=400></svg>
-  <!-- secondary data display: global sales of top 5 games in genre -->
-  <svg id="secondary_chart" width=300 height=300></svg>
+  <!-- main data display svg: sales by genre -->
+  <svg id="main_chart" width=800 height=400></svg>
 
   <!-- add charts -->
   <script src="data_vis.js"></script>

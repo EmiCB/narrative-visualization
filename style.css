@@ -1,3 +1,7 @@
+html {
+  font-family: "Courier New", monospace;
+}
+
 rect {
   stroke: black;
   fill: lightblue;
