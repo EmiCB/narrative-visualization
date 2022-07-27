@@ -13,6 +13,16 @@
   <h1>Video Game Genre Sales</h1>
   <p>total global sales per genre</p>
 
+  <!-- slideshow buttons -->
+  <!-- TODO: make visually better + more responsive -->
+  <div>
+    <button onclick="draw_chart(main_chart, genre_total_sales_global)">Overview</button>
+    <button onclick="draw_chart(main_chart, genre_total_sales_NA)">NA</button>
+    <button onclick="draw_chart(main_chart, genre_total_sales_EU)">EU</button>
+    <button onclick="draw_chart(main_chart, genre_total_sales_JP)">JP</button>
+    <button onclick="draw_chart(main_chart, genre_total_sales_other)">Other</button>
+  </div>
+
   <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->
   <!-- main data display svg: sales by genre -->
   <svg id="main_chart" width=800 height=400></svg>
