@@ -1,4 +1,8 @@
 rect {
-  stroke: red;
+  stroke: black;
   fill: lightblue;
+}
+
+rect:hover {
+  fill: aquamarine;
 }

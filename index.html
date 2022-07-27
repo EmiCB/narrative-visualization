@@ -31,10 +31,21 @@
       })
       .entries(full_data);
 
-    // constant display settings
+    // display settings
     var width = 400;
     var height = 400;
     var margin = 50;
+    var w = width - 2 * margin;
+    var h = height - 2 * margin;
+
+    var bar_width = width / 12; // TODO: figure out how to get number of keys
+    
+    var max_global_sales = d3.max(genre_totals, function(d) { return d.value; } );
+
+    // debug
+    genre_totals.forEach(function(d) {
+      console.log(d.key, d.value);
+    });
 
     // display main bar chart
     d3.select("svg")
@@ -42,13 +53,12 @@
       .attr("height", height + 2 * margin)
       .append("g")
         .attr("transform", "translate("+margin+","+margin+")")
-      .selectAll().data(full_data).enter().append("rect")
-        .attr("x",function(d,i){ return i*(200/6); })
-        .attr("y",function(d){ return 200-(d.Global_Sales*200/42); })
-        .attr("width", 200/6)
-        .attr("height", function(d){ return d.Global_Sales*200/42; });
+      .selectAll().data(genre_totals).enter().append("rect")
+        .attr("x",function(d,i){ return i*bar_width; })
+        .attr("y",function(d){ return h-(d.value*h/max_global_sales); })
+        .attr("width", bar_width)
+        .attr("height", function(d){ return d.value*h/max_global_sales; });
   }
-  
 </script>
 </body>
 </html>
