@@ -69,6 +69,7 @@ async function init() {
 }
 
 function draw_chart(svg, data) {
+  // clear chart
   svg.html("");
 
   // display settings
@@ -129,6 +130,24 @@ function draw_chart(svg, data) {
         .style('left', (d3.event.pageX+tooltip_offset) + 'px')
         .style('top', (d3.event.pageY-tooltip_offset) + 'px');
     })
+}
+
+// slideshow changer
+function change_slide(svg, data) {
+  draw_chart(svg, data);
+}
+
+function toggle_active(button) {
+  var buttons = document.getElementsByTagName('button');
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+
+  if (button.classList.contains("active")) {
+    button.classList.remove("active");
+  } else {
+    button.classList.add("active");
+  }
 }
 
 // TODO: add annotations

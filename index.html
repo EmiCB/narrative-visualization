@@ -17,12 +17,12 @@
 
   <!-- slideshow buttons -->
   <!-- TODO: make visually better + more responsive -->
-  <div class="slideshow-buttons">
-    <button onclick="draw_chart(main_chart, genre_total_sales_global)">Overview</button>
-    <button onclick="draw_chart(main_chart, genre_total_sales_NA)">NA</button>
-    <button onclick="draw_chart(main_chart, genre_total_sales_EU)">EU</button>
-    <button onclick="draw_chart(main_chart, genre_total_sales_JP)">JP</button>
-    <button onclick="draw_chart(main_chart, genre_total_sales_other)">Other</button>
+  <div id="slideshow-buttons">
+    <button onclick="change_slide(main_chart, genre_total_sales_global); toggle_active(this)" class="active">Overview</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_NA); toggle_active(this)">NA</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_EU); toggle_active(this)">EU</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_JP); toggle_active(this)">JP</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_other); toggle_active(this)">Other</button>
   </div>
 
   <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->

@@ -28,3 +28,19 @@ rect:hover {
   position: absolute; 
   opacity: 0;
 }
+
+/* TODO: make this not a copy from w3schools */
+/* Style the buttons */
+button {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.active, button:hover {
+  background-color: #666;
+  color: white;
+}
