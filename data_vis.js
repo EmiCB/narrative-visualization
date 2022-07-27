@@ -1,10 +1,11 @@
 async function init() {
-  // load data downlaoded from: https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download
+  // load data 
+  // downloaded from: https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download
   const full_data = await d3.csv('vgsales.csv');
 
   // group data
   // code adapted from: http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
-  var genre_totals = d3.nest()
+  const genre_totals = d3.nest()
     .key(function(d){ return d.Genre; })
     .rollup(function(d){
       return d3.sum(d, function(g){ return g.Global_Sales; });
@@ -16,57 +17,51 @@ async function init() {
   genre_totals.sort(function(a, b){ return d3.descending(a.value, b.value) });
 
   // collect chart canvases
-  const svg1 = d3.select("#main_chart");
-  const svg2 = d3.select("#secondary_chart");
+  const main_chart = d3.select("#main_chart");
+  const secondary_chart = d3.select("#secondary_chart");
 
-  draw_main_chart(svg1, genre_totals);
+  // draw visualizations
+  draw_main_chart(main_chart, genre_totals);
 }
 
-function draw_main_chart(svg1, genre_totals) {
+function draw_main_chart(svg, data) {
   // display settings
-  var width = 600;
-  var height = 400;
-  var margin = 50;
-  var w = width - 2 * margin;
-  var h = height - 2 * margin;
-
-  var bar_width = width / 12; // FIXME: figure out how to get number of keys
-  
-  var max_global_sales = d3.max(genre_totals, function(d) { return d.value; } );
-
-  // FIXME: remove debug
-  genre_totals.forEach(function(d) {
-    console.log(d.key, d.value);
-  });
+  const width = parseInt(svg.style("width"));
+  const height = parseInt(svg.style("height"));
+  const margin = 50;
+  const w = width - 2 * margin;
+  const h = height - 2 * margin;
+  const bar_width = w / d3.keys(data).length;
+  const max_height = d3.max(data, function(d) { return d.value; } );
 
   // display main bar chart
-  svg1 
+  svg 
     .attr("width", width + 2 * margin)
     .attr("height", height + 2 * margin)
     .append("g")
       .attr("transform", "translate("+margin+","+margin+")")
-    .selectAll().data(genre_totals).enter().append("rect")
+    .selectAll().data(data).enter().append("rect")
       .attr("x",function(d,i){ return i*bar_width; })
-      .attr("y",function(d){ return h-(d.value*h/max_global_sales); })
+      .attr("y",function(d){ return h-(d.value*h/max_height); })
       .attr("width", bar_width)
-      .attr("height", function(d){ return d.value*h/max_global_sales; });
+      .attr("height", function(d){ return d.value*h/max_height; });
 
   // axis scales
   // code adapted from: https://www.tutorialsteacher.com/d3js/create-bar-chart-using-d3js
   var x_scale = d3.scaleBand()
-    .domain(genre_totals.map(function(d){ return d.key }))
-    .range([0, width]); // FIXME: why is this wiidth, but the other is h?
+    .domain(data.map(function(d){ return d.key }))
+    .range([0, w]);
   var y_scale = d3.scaleLinear()
-    .domain([0, max_global_sales])
+    .domain([0, max_height])
     .range([h, 0]);
 
   // add x-axis
-  svg1.append("g")
+  svg.append("g")
     .attr("transform", "translate("+margin+","+(height-margin)+")")
     .call(d3.axisBottom(x_scale));
 
   // add y-axis
-  svg1.append("g")
+  svg.append("g")
     .attr("transform", "translate("+margin+","+margin+")")
     .call(d3.axisLeft(y_scale)
       .tickFormat(function(d){ return d; })
