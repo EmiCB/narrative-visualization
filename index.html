@@ -1,89 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- import D3 library -->
+  <!-- import D3 libraries -->
   <script src='https://d3js.org/d3.v5.min.js'></script>
+  <script src='https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js'></script>
   <!-- link stylesheets -->
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body onload='init()'>
   <!-- type: drill down story -->
-  <h1>Hello World</h1>
+  <h1>Video Game Genre Sales</h1>
+  <p>total global sales per genre</p>
 
+  <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->
   <!-- main data display svg: global sales by genre -->
-  <svg width=600 height=400></svg>
+  <svg id="main_chart" width=600 height=400></svg>
+  <!-- secondary data display: global sales of top 5 games in genre -->
+  <svg id="secondary_chart" width=300 height=300></svg>
 
-  <!-- TODO: add secondary data display: global sales of top 5 games in genre -->
-
-<!-- JS -->
-<script>
-  async function init() {
-    // load data downlaoded from: https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download
-    const full_data = await d3.csv('vgsales.csv');
-
-    // group data
-    // code adapted from: http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
-    var genre_totals = d3.nest()
-      .key(function(d){ return d.Genre; })
-      .rollup(function(d){
-        return d3.sum(d, function(g){ return g.Global_Sales; });
-      })
-      .entries(full_data);
-
-    // sort data
-    // code adapted from: https://stackoverflow.com/questions/46205118/how-to-sort-a-d3-bar-chart-based-on-an-array-of-objects-by-value-or-key
-    genre_totals.sort(function(a, b){ return d3.descending(a.value, b.value) });
-
-    // display settings
-    var width = 600;
-    var height = 400;
-    var margin = 50;
-    var w = width - 2 * margin;
-    var h = height - 2 * margin;
-
-    var bar_width = width / 12; // FIXME: figure out how to get number of keys
-    
-    var max_global_sales = d3.max(genre_totals, function(d) { return d.value; } );
-
-    // FIXME: remove debug
-    genre_totals.forEach(function(d) {
-      console.log(d.key, d.value);
-    });
-
-    // display main bar chart
-    d3.select("svg")
-      .attr("width", width + 2 * margin)
-      .attr("height", height + 2 * margin)
-      .append("g")
-        .attr("transform", "translate("+margin+","+margin+")")
-      .selectAll().data(genre_totals).enter().append("rect")
-        .attr("x",function(d,i){ return i*bar_width; })
-        .attr("y",function(d){ return h-(d.value*h/max_global_sales); })
-        .attr("width", bar_width)
-        .attr("height", function(d){ return d.value*h/max_global_sales; });
-
-    // axis scales
-    // code adapted from: https://www.tutorialsteacher.com/d3js/create-bar-chart-using-d3js
-    var x_scale = d3.scaleBand()
-      .domain(genre_totals.map(function(d){ return d.key }))
-      .range([0, width]); // FIXME: why is this wiidth, but the other is h?
-    var y_scale = d3.scaleLinear()
-      .domain([0, max_global_sales])
-      .range([h, 0]);
-
-    // add x-axis
-    d3.select("svg").append("g")
-      .attr("transform", "translate("+margin+","+(height-margin)+")")
-      .call(d3.axisBottom(x_scale));
-
-    // add y-axis
-    d3.select("svg").append("g")
-      .attr("transform", "translate("+margin+","+margin+")")
-      .call(d3.axisLeft(y_scale)
-        .tickFormat(function(d){ return d; })
-        .ticks(10));
-  }
-</script>
+  <!-- add charts -->
+  <script src="data_vis.js"></script>
 </body>
 </html>
