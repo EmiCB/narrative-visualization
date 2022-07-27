@@ -32,7 +32,7 @@
       .entries(full_data);
 
     // display settings
-    var width = 400;
+    var width = 600;
     var height = 400;
     var margin = 50;
     var w = width - 2 * margin;
@@ -58,6 +58,27 @@
         .attr("y",function(d){ return h-(d.value*h/max_global_sales); })
         .attr("width", bar_width)
         .attr("height", function(d){ return d.value*h/max_global_sales; });
+
+    // axis scales
+    // code adapted from: https://www.tutorialsteacher.com/d3js/create-bar-chart-using-d3js
+    var x_scale = d3.scaleBand()
+      .domain(genre_totals.map(function(d){ return d.key }))
+      .range([0, width]); // TODO: why is this wiidth, but the other is h?
+    var y_scale = d3.scaleLinear()
+      .domain([0, max_global_sales])
+      .range([h, 0]);
+
+    // add x-axis
+    d3.select("svg").append("g")
+      .attr("transform", "translate("+margin+","+(height-margin)+")")
+      .call(d3.axisBottom(x_scale));
+
+    // add y-axis
+    d3.select("svg").append("g")
+      .attr("transform", "translate("+margin+","+margin+")")
+      .call(d3.axisLeft(y_scale)
+        .tickFormat(function(d){ return d; })
+        .ticks(10));
   }
 </script>
 </body>
