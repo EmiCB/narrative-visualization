@@ -12,6 +12,19 @@ svg {
   display:block;
 }
 
+.annotation {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  width: 60vw;
+}
+
+#slideshow-buttons {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60vw;
+}
+
 /* bar styles */
 rect {
   stroke: black;

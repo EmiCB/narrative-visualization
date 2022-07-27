@@ -12,17 +12,17 @@
   <!-- type: interactive slide show -->
   <h1>Video Game Genre Sales</h1>
   <div class="annotation">
-    <p>total global sales per genre</p>
+    <text id="annotation-text"></text>
   </div>
 
   <!-- slideshow buttons -->
   <!-- TODO: make visually better + more responsive -->
   <div id="slideshow-buttons">
-    <button onclick="change_slide(main_chart, genre_total_sales_global); toggle_active(this)" class="active">Overview</button>
-    <button onclick="change_slide(main_chart, genre_total_sales_NA); toggle_active(this)">NA</button>
-    <button onclick="change_slide(main_chart, genre_total_sales_EU); toggle_active(this)">EU</button>
-    <button onclick="change_slide(main_chart, genre_total_sales_JP); toggle_active(this)">JP</button>
-    <button onclick="change_slide(main_chart, genre_total_sales_other); toggle_active(this)">Other</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_global); toggle_active(this); display_annotation_overview()" class="active">Overview</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_NA); toggle_active(this); display_annotation_na()">NA</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_EU); toggle_active(this); display_annotation_eu()">EU</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_JP); toggle_active(this); display_annotation_jp()">JP</button>
+    <button onclick="change_slide(main_chart, genre_total_sales_other); toggle_active(this); display_annotation_other()">Other</button>
   </div>
 
   <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->
@@ -31,5 +31,6 @@
 
   <!-- add charts -->
   <script src="data_vis.js"></script>
+  <script src="annotations.js"></script>
 </body>
 </html>

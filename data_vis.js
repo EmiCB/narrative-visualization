@@ -61,6 +61,7 @@ async function init() {
 
   // draw visualizations
   draw_chart(main_chart, genre_total_sales_global);
+  display_annotation_overview();
 
   // add tooltip (main: region breakdowns, other: top games)
   // code adapted from: https://mappingwithd3.com/tutorials/basics/tooltip/
@@ -138,11 +139,13 @@ function change_slide(svg, data) {
 }
 
 function toggle_active(button) {
+  // clear all buttons
   var buttons = document.getElementsByTagName('button');
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].classList.remove("active");
   }
 
+  // toggle active button
   if (button.classList.contains("active")) {
     button.classList.remove("active");
   } else {
@@ -150,11 +153,10 @@ function toggle_active(button) {
   }
 }
 
-// TODO: add annotations
-// code adapted from: https://d3-annotation.susielu.com ?
-
 // TODO: expand on tooltip info
 
 // TODO: add chart and axis titles
 
-// TODO: overaly region specific data for each slide
+// TODO: overaly region specific data for each slide ?
+
+// TODO: colors for each category
