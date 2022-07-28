@@ -5,6 +5,7 @@ var genre_total_sales_JP;
 var genre_total_sales_EU;
 var genre_total_sales_other;
 var main_chart;
+var genres;
 
 async function init() {
   // load data 
@@ -56,6 +57,9 @@ async function init() {
   genre_total_sales_EU.sort(function(a, b){ return d3.descending(a.value, b.value) });
   genre_total_sales_other.sort(function(a, b){ return d3.descending(a.value, b.value) });
 
+  // collect genre names
+  genres = d3.map(genre_total_sales_global, function(d){return(d.key)}).keys();
+
   // collect chart canvases
   main_chart = d3.select("#main_chart");
 
@@ -82,6 +86,14 @@ function draw_chart(svg, data) {
   const bar_width = w / d3.keys(data).length;
   const max_height = d3.max(data, function(d) { return d.value; } );
 
+  // TODO: colors for each category
+  var colors = ['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080'];
+  var genre_colors = d3.map();
+
+  for (let i = 0; i < colors.length; i++) {
+    genre_colors.set(genres[i], colors[i]);
+  }
+
   // display main bar chart
   svg 
     .append("g")
@@ -90,7 +102,8 @@ function draw_chart(svg, data) {
       .attr("x",function(d,i){ return i*bar_width; })
       .attr("y",function(d){ return h-(d.value*h/max_height); })
       .attr("width", bar_width)
-      .attr("height", function(d){ return d.value*h/max_height; });
+      .attr("height", function(d){ return d.value*h/max_height; })
+      .attr("fill", function(d){ return genre_colors.get(d.key); });
 
   // axis scales
   // code adapted from: https://www.tutorialsteacher.com/d3js/create-bar-chart-using-d3js
@@ -156,7 +169,3 @@ function toggle_active(button) {
 // TODO: expand on tooltip info
 
 // TODO: add chart and axis titles
-
-// TODO: overaly region specific data for each slide ?
-
-// TODO: colors for each category

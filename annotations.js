@@ -1,8 +1,8 @@
-// TODO: add annotations
+// TODO: write up main text
 const text = document.getElementById("annotation-text");
 
 function display_annotation_overview() {
-  text.innerHTML = "Overview"
+  text.innerHTML = "Overview (games released from 1980-2020)"
 }
 
 function display_annotation_na() {
@@ -20,3 +20,6 @@ function display_annotation_jp() {
 function display_annotation_other() {
   text.innerHTML = "Other"
 }
+
+// TODO: add extra annotations
+// https://d3-annotation.susielu.com/#examples

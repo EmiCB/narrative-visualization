@@ -11,12 +11,11 @@
 <body onload='init()'>
   <!-- type: interactive slide show -->
   <h1>Video Game Genre Sales</h1>
-  <div class="annotation">
+  <div class="text-container">
     <text id="annotation-text"></text>
   </div>
 
   <!-- slideshow buttons -->
-  <!-- TODO: make visually better + more responsive -->
   <div id="slideshow-buttons">
     <button onclick="change_slide(main_chart, genre_total_sales_global); toggle_active(this); display_annotation_overview()" class="active">Overview</button>
     <button onclick="change_slide(main_chart, genre_total_sales_NA); toggle_active(this); display_annotation_na()">NA</button>
@@ -28,6 +27,11 @@
   <!-- handling multiple charts: https://stackoverflow.com/questions/41940439/display-multiple-d3-js-charts-in-a-single-html-page -->
   <!-- main data display svg: sales by genre -->
   <svg id="main_chart" width=800 height=400></svg>
+
+  <div class="text-container">
+    <p>The data used was provided by <a href="https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download">Video Game Sales on Kaggle</a></p>
+    <p>This website was made with HTML, CSS, JavaScript, and D3. View the source code on <a href="https://github.com/EmiCB/narrative-visualization">GitHub</a></p>
+  </div>
 
   <!-- add charts -->
   <script src="data_vis.js"></script>
