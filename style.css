@@ -32,7 +32,7 @@ rect {
 }
 
 rect:hover {
-  fill: rgba(0, 0, 0, .5);
+  fill: rgba(0, 0, 0, .3);
 }
 
 /* tooltips */

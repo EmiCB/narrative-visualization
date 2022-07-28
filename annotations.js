@@ -12,18 +12,43 @@ function display_annotation_overview() {
 
 function display_annotation_na() {
   text.innerHTML = "NA"
+
+  display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
+    "Annotations :)", 
+    "Longer text to show text wrapping",
+    200);
 }
 
 function display_annotation_eu() {
   text.innerHTML = "EU"
+
+  display_svg_annotation(50+bar_width*3, 50, bar_width*4, 300, 10, 280, 120, 
+    "Annotations :)", 
+    "Longer text to show text wrapping",
+    200);
 }
 
 function display_annotation_jp() {
   text.innerHTML = "JP"
+
+  display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
+    "Annotations :)", 
+    "Longer text to show text wrapping",
+    200);
+
+  display_svg_annotation(50+bar_width*11, 50, bar_width, 300, 10, -100, 150, 
+    "Annotations :)", 
+    "Longer text to show text wrapping",
+    200);
 }
 
 function display_annotation_other() {
   text.innerHTML = "Other"
+
+  display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
+    "Annotations :)", 
+    "Longer text to show text wrapping",
+    200);
 }
 
 // add extra annotations

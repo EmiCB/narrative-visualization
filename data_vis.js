@@ -47,7 +47,7 @@ async function init() {
   genre_total_sales_other = d3.nest()
     .key(function(d){ return d.Genre; })
     .rollup(function(d){
-      return d3.sum(d, function(g){ return g.EU_Sales; });
+      return d3.sum(d, function(g){ return g.Other_Sales; });
     })
     .entries(full_data);
 
