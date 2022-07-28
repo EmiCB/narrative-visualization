@@ -1,5 +1,6 @@
 html {
   font-family: "Courier New", monospace;
+  background-color: whitesmoke;
 }
 
 h1 {
@@ -20,19 +21,15 @@ svg {
 }
 
 #slideshow-buttons {
-  margin-left: auto;
-  margin-right: auto;
-  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* bar styles */
-/*
 rect {
   stroke: black;
-  fill: lightblue;
 }
-}*/
-
 
 rect:hover {
   fill: rgba(0, 0, 0, .5);
@@ -45,6 +42,8 @@ rect:hover {
   border-radius: 10px;
   position: absolute; 
   opacity: 0;
+  border-style: solid;
+  border-width: 1px;
 }
 
 /* TODO: make this not a copy from w3schools */
@@ -57,6 +56,8 @@ button {
   cursor: pointer;
   font-weight: bold;
   margin: 0px;
+  float: left;
+  margin: 0px 5px;
 }
 
 /* Style the active class (and buttons on mouse-over) */
