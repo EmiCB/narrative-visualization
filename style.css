@@ -46,8 +46,7 @@ rect:hover {
   border-width: 1px;
 }
 
-/* TODO: make this not a copy from w3schools */
-/* Style the buttons */
+/* slide buttons */
 button {
   border: none;
   outline: none;
@@ -60,8 +59,19 @@ button {
   margin: 0px 5px;
 }
 
-/* Style the active class (and buttons on mouse-over) */
 .active, button:hover {
   background-color: grey;
   color: white;
+}
+
+/* annotations */
+.subject {
+  stroke-width: 2;
+  stroke-dasharray: 5px;
+  fill: none
+}
+
+/* remove box around writing */
+rect.annotation-note-bg {
+  stroke: none;
 }

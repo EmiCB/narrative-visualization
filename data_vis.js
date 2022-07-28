@@ -7,6 +7,8 @@ var genre_total_sales_other;
 var main_chart;
 var genres;
 
+var bar_width;
+
 async function init() {
   // load data 
   // downloaded from: https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download
@@ -83,7 +85,7 @@ function draw_chart(svg, data) {
   const margin = 50;
   const w = width - 2 * margin;
   const h = height - 2 * margin;
-  const bar_width = w / d3.keys(data).length;
+  bar_width = w / d3.keys(data).length;
   const max_height = d3.max(data, function(d) { return d.value; } );
 
   // colors for each category
