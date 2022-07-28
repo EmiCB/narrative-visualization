@@ -1,8 +1,7 @@
-// TODO: write up main text
 const text = document.getElementById("annotation-text");
 
 function display_annotation_overview() {
-  text.innerHTML = "Overview (games released from 1980-2020)"
+  text.innerHTML = "This overview chart shows the total global sales (in millions of copies) of video games released from 1980-2020 classified by genre. Only games that sold over 100,000 copies have been included."
 
   display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
     "Top 3 Genres", 
@@ -11,7 +10,7 @@ function display_annotation_overview() {
 }
 
 function display_annotation_na() {
-  text.innerHTML = "NA"
+  text.innerHTML = "North America contributes to about half of game sales globally, which would heavily influence genre popularity in the overview chart. However, we see roleplaying games shift from 4th to 7th."
 
   display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
     "North America", 
@@ -20,7 +19,7 @@ function display_annotation_na() {
 }
 
 function display_annotation_eu() {
-  text.innerHTML = "EU"
+  text.innerHTML = "In Europe, the most popular genres again stay the same. However, there is a signifcant shift in the middle group, again with RPGs moving from 4th to 7th."
 
   display_svg_annotation(50+bar_width*3, 50, bar_width*4, 300, 10, 300, 100, 
     "Europe", 
@@ -29,7 +28,7 @@ function display_annotation_eu() {
 }
 
 function display_annotation_jp() {
-  text.innerHTML = "JP"
+  text.innerHTML = "Japan overall buys fewer video game copies than North America and Europe. However, the market is also very different. RPGs are immensely popular, while shooters are the least. Racing is also far less popular."
 
   display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
     "Japan", 
@@ -43,7 +42,7 @@ function display_annotation_jp() {
 }
 
 function display_annotation_other() {
-  text.innerHTML = "Other"
+  text.innerHTML = "This section is a compilation of all the other regions. They seem to follow the global trends resonably closely. However, the lower popularity genres are slightly different."
 
   display_svg_annotation(50, 50, bar_width*3, 300, 10, 350, 10, 
     "Other Regions", 

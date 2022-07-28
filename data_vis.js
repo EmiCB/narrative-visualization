@@ -137,7 +137,7 @@ function draw_chart(svg, data) {
       d3.select('#tooltip')
         .transition().duration(200)
         .style('opacity', 1)
-        .text("Sales: " + d3.format('0.1f')(d.value) + " billion");
+        .text("Sales: " + d3.format('0.1f')(d.value) + " million");
     })
     .on(`mouseout`, function() {
       d3.select('#tooltip').style('opacity', 0);
