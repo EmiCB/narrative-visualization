@@ -89,7 +89,7 @@ function draw_chart(svg, data) {
   const max_height = d3.max(data, function(d) { return d.value; } );
 
   // colors for each category
-  //var colors = ['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080'];
+  // color palette: https://colorswall.com/palette/92651/ (lightened to 70%)
   var colors = ['#ff6666', '#ffb366', '#ffff66', '#b3ff66', '#66ff66', '#66ffb3', '#66ffff', '#66b3ff', '#6666ff', '#b366ff', '#ff66ff', '#ff66b3'];
   var genre_colors = d3.map();
 
@@ -137,7 +137,7 @@ function draw_chart(svg, data) {
       d3.select('#tooltip')
         .transition().duration(200)
         .style('opacity', 1)
-        .text("Sales: " + d3.format('0.1f')(d.value) + " million");
+        .text("Sales: " + d3.format('0.1f')(d.value) + " million copies");
     })
     .on(`mouseout`, function() {
       d3.select('#tooltip').style('opacity', 0);
